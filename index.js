@@ -41,11 +41,16 @@ app.use((err,req,res,next)=>{
         stack: err.stack,
     })
 })
+
 const server= app.listen(PORT,()=>{
     mongoConnect();
     console.log("database connected")
 })
-const io = new Server(server);
+const io = new Server(server,{
+  cors: {
+    origin:"https://polite-liger-6797c3.netlify.app",
+  },
+});
 let users = [];
 
 const addUser = (userId, socketId) => {
