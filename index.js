@@ -9,7 +9,7 @@ import cookieParser from "cookie-parser"
 
 import { Server } from "socket.io";
 
-
+const PORT=process.env.PORT || 4000
 
 const app=express();
 
@@ -41,15 +41,11 @@ app.use((err,req,res,next)=>{
         stack: err.stack,
     })
 })
-const server= app.listen(4000,()=>{
+const server= app.listen(PORT,()=>{
     mongoConnect();
     console.log("database connected")
 })
-const io = new Server(server,{
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
+const io = new Server(server);
 let users = [];
 
 const addUser = (userId, socketId) => {
