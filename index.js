@@ -23,7 +23,7 @@ const mongoConnect=async ()=>{
     }
 }
 
-
+app.use("/public",express.static("public"))
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());

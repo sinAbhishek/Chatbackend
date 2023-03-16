@@ -10,9 +10,9 @@ export const Register=async (req,res)=>{
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 console.log(req.body)
-    const newuser=new User({
-        ...req.body,password:hash
-    })
+const newuser=new User({
+    ...req.body,password:hash,image:req.file.originalname
+})
     const saveduser = await newuser.save()
     res.status(200).json(saveduser)
  }
